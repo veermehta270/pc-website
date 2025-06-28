@@ -1,0 +1,10 @@
+flask
+flask-login
+authlib
+pandas
+openpyxl
+python-dateutil
+google-api-python-client
+google-auth
+google-auth-oauthlib
+gunicorn
