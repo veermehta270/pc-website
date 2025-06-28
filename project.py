@@ -106,6 +106,9 @@ def upload_new():
 
 
     
+@app.route('/')
+def home():
+    return redirect(url_for('upload'))
 
 
 
