@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Loan Calculator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f9f9f9;
+      padding: 20px;
+      color: #333;
+    }
+    h3 {
+      color: #005b96;
+    }
+    form {
+      background: #fff;
+      padding: 20px;
+      margin-bottom: 30px;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      max-width: 600px;
+    }
+    label {
+      display: block;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+    input[type="text"],
+    input[type="number"],
+    input[type="file"],
+    select {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    button {
+      background: #007BFF;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      margin-top: 20px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #0056b3;
+    }
+    #manualButton {
+      background-color: #28a745;
+    }
+    #manualButton:hover {
+      background-color: #1e7e34;
+    }
+
+    .calculator-container {
+        display: flex;
+        gap: 40px;
+        flex-wrap: wrap;
+    }
+
+    .calculator-container form{
+        flex: 1;
+        min-width: 320px;
+        max-width: 600px
+    }
+
+  </style>
+</head>
+<body>
+
+
+
+
+
+    
+<div class="calculator-container">
+  <!-- Calculator 1 -->
+  <form method="POST" action="/upload" enctype="multipart/form-data">
+    <h3>Calculator 1: Loan Identifier</h3>
+    
+    <label for="file">Excel File:</label>
+    <input type="file" name="file" required>
+
+    <label for="months">Months (e.g. 6, 9, 12):</label>
+    <input type="text" name="months" required>
+
+    <button type="submit">Generate & Download</button>
+  </form>
+
+  <!-- Calculator 2 -->
+  
+
+  <form method="POST" action="/upload_new" enctype="multipart/form-data" id="calc2-form">
+
+    <h3>Calculator 2: Repyaments Screener</h3>
+
+    <button type="button" id="manualButton">Use Manual Entry</button>
+
+    <!-- Manual Fields -->
+    <div id="manualFields" style="display: none;">
+      <label>Start Date:</label>
+      <input type="text" name="start">
+
+      <label>Tenor (months):</label>
+      <input type="number" name="tenor">
+
+      <label>Repayment Amount:</label>
+      <input type="number" step="any" name="repayment">
+
+      <label>Frequency:</label>
+      <select name="frequency">
+        <option value="Monthly">Monthly</option>
+        <option value="Biweekly">Biweekly</option>
+      </select>
+    </div>
+
+    <!-- File-based Field -->
+    <div id="fileBasedFields">
+      <label>Loan Data File:</label>
+      <input type="file" name="loan_data">
+    </div>
+
+    <!-- Shared Fields -->
+    <label>Transactions CSV File:</label>
+    <input type="file" name="transactions" required>
+
+    <label>Days Before:</label>
+    <input type="number" name="days_before" required>
+
+    <label>Days After:</label>
+    <input type="number" name="days_after" required>
+
+    <input type="hidden" name="use_manual" id="use_manual" value="false">
+
+    <button type="submit">Analyze</button>
+  </form>
+
+</div>
+  <script>
+    const manualButton = document.getElementById('manualButton');
+    const manualFields = document.getElementById('manualFields');
+    const fileBasedFields = document.getElementById('fileBasedFields');
+    const useManualInput = document.getElementById('use_manual');
+
+    manualButton.addEventListener('click', () => {
+      const isManual = manualFields.style.display === 'none';
+      manualFields.style.display = isManual ? 'block' : 'none';
+      fileBasedFields.style.display = isManual ? 'none' : 'block';
+      useManualInput.value = isManual ? 'true' : 'false';
+      manualButton.textContent = isManual ? 'Use File-Based Entry' : 'Use Manual Entry';
+    });
+  </script>
+
+</body>
+</html>
