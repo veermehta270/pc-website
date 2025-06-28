@@ -8,7 +8,6 @@ from openpyxl.styles import Alignment
 from tkinter import filedialog
 from tkinter import *
 from PIL import Image, ImageTk
-import winsound
 from tkinter.ttk import Progressbar
 from openpyxl.styles import PatternFill, Border, Side, Font, Alignment
 from openpyxl import Workbook
